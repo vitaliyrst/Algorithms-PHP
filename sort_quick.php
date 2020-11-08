@@ -1,6 +1,5 @@
 <?php
 
-//Разделяй и властвуй
 //Быстрая сортировка
 function quick($arr)
 {
@@ -23,7 +22,6 @@ function quick($arr)
     $left_arr = quick($left_arr); // применяем рекурсию для сортировки левого массива
 
     $right_arr = quick($right_arr); // применяем рекурсию для сортировки правого массива
-    var_dump($right_arr);
     return array_merge($left_arr, array($middle), $right_arr);
 }
 

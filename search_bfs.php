@@ -1,5 +1,40 @@
 <?php
 
+// BFS  поиск в ширину
+
+function bfs($graph, $start, $end)
+{
+    $startNode = $start; //старт пути
+    $endNode = $end; //искомая точка
+    $searchQueue = []; //очередь
+    $searched = []; //те кто уже проверен
+
+    foreach ($graph[$startNode] as $neighbor) {
+        $searchQueue[] = $neighbor; //добавляем соседей в очередь
+    }
+
+    while ($searchQueue) { //пока есть очередь
+        $node = array_shift($searchQueue);// извлекаем соседа из очереди
+        echo $node . ' -> ';
+        if (!in_array($node, $searched)) {
+            if ($node === $endNode) {
+
+                echo 'Целевая точка найдена';
+                return $node;
+            } else {
+                foreach ($graph[$node] as $otherNeighbor) { // проверяем есть ли у соседнего узла свои соседи
+                    $searchQueue[] = $otherNeighbor; // добавляем их в очередь
+                }
+
+                $searched[] = $node; // проверенного соседа помечаем как проверенного
+            }
+        }
+    }
+
+    echo 'Целевая точка не найдена';
+}
+
+
 $graph = [
     'A' => ['B', 'C', 'D'],
     'B' => ['G', 'H'],
@@ -10,31 +45,5 @@ $graph = [
     'G' => [],
     'H' => []
 ];
-$startNode = 'A';
-$endNode   = 'H';
 
-$searchQueue = [];
-$searched    = [];
-
-foreach($graph[$startNode] as $value) {
-    $searchQueue[] = $value;
-}
-
-while($searchQueue) {
-    $node = array_shift($searchQueue);
-
-    if(!in_array($node, $searched)) {
-        if($node === $endNode) {
-            echo 'Целевая точка найдена';
-            die();
-        } else {
-            foreach($graph[$node] as $value) {
-                $searchQueue[] = $value;
-            }
-
-            $searched[] = $node;
-        }
-    }
-}
-
-echo 'Целевая точка не найдена';
+$res = bfs($graph, 'A', 'H');
