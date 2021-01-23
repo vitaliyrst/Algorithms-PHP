@@ -9,7 +9,7 @@ function binarySearch($arr, $item)
     $end = count($arr) - 1;
 
     while ($start <= $end) {
-        $mid = ($start + $end) / 2; //Находим середину
+        $mid = round(($start + $end) / 2); //Находим середину
         $guess = $arr[$mid]; //Присваиваем значение середины
         if ($guess == $item) { //Если угадали, вернем искомый элемент
             return $mid;
@@ -24,4 +24,4 @@ function binarySearch($arr, $item)
 }
 
 $items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 30, 40, 60];
-echo binarySearch($items, 1);
+echo binarySearch($items, 6);

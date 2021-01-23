@@ -30,10 +30,8 @@ function bfs($graph, $start, $end)
             }
         }
     }
-
     echo 'Целевая точка не найдена';
 }
-
 
 $graph = [
     'A' => ['B', 'C', 'D'],
@@ -45,5 +43,3 @@ $graph = [
     'G' => [],
     'H' => []
 ];
-
-$res = bfs($graph, 'A', 'H');
